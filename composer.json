@@ -1,7 +1,7 @@
 {
   "name": "e-conomix/module-dbtranslations",
   "type": "magento2-module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Economix DB translation module",
   "keywords":[ "composer-installer", "magento"],
   "authors": [
