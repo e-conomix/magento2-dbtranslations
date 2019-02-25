@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Economix_DbTranslations::translations" title="Translations" module="Economix_DbTranslations" sortOrder="51" resource="Economix_DbTranslations::config" parent="Magento_Backend::content"/>
+        <add id="Economix_DbTranslations::db_translations" title="Database Translations" module="Economix_DbTranslations" sortOrder="10" action="ecx_dbtranslations/dbtranslations/index" resource="Economix_DbTranslations::config" parent="Economix_DbTranslations::translations"/>
+    </menu>
+</config>
