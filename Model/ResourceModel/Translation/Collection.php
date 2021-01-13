@@ -1,12 +1,10 @@
 <?php
 /**
  * @author      Benjamin Rosenberger <rosenberger@e-conomix.at>
- * @package
  * @copyright   Copyright (c) 2017 E-CONOMIX GmbH (http://www.e-conomix.at)
  */
 
 namespace Economix\DbTranslations\Model\ResourceModel\Translation;
-
 
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
@@ -15,6 +13,10 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class Collection
+ * .
+ */
 class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult
 {
 
@@ -49,8 +51,17 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         $connection = null,
         AbstractDb $resource = null
     ) {
+        parent::__construct(
+            $entityFactory,
+            $logger,
+            $fetchStrategy,
+            $eventManager,
+            'translation',
+            \Magento\Translation\Model\ResourceModel\Translate::class,
+            'key_id',
+            $connection
+        );
         $this->storeManager = $storeManager;
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager,'translation', \Magento\Translation\Model\ResourceModel\Translate::class, 'key_id', $connection);
     }
 
     /**
@@ -60,7 +71,10 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
      */
     protected function _construct()
     {
-        $this->_init(\Economix\DbTranslations\Model\Translate::class, \Magento\Translation\Model\ResourceModel\Translate::class);
+        $this->_init(
+            \Economix\DbTranslations\Model\Translate::class,
+            \Magento\Translation\Model\ResourceModel\Translate::class
+        );
         $this->_map['fields']['key_id'] = 'main_table.key_id';
         $this->_map['fields']['store_id'] = 'store_table.store_id';
     }
@@ -93,7 +107,7 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
             }
 
             if ($withAdmin) {
-                $store[] = Store::DEFAULT_STORE_ID;
+                $store[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
             }
 
             $this->addFilter('store_id', ['in' => $store], 'public');
@@ -110,8 +124,6 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         foreach($this as $item) {
             $item->setStores([(int)$item->getStoreId()]);
         }
-
-
 
         $linkedIds = $this->getColumnValues($linkField);
         if (count($linkedIds)) {
@@ -132,7 +144,11 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
                     if (!isset($storesData[$linkedId])) {
                         continue;
                     }
-                    $storeIdKey = array_search(Store::DEFAULT_STORE_ID, $storesData[$linkedId], true);
+                    $storeIdKey = array_search(
+                        \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                        $storesData[$linkedId],
+                        true
+                    );
                     if ($storeIdKey !== false) {
                         $stores = $this->storeManager->getStores(false, true);
                         $storeId = current($stores)->getId();

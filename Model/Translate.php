@@ -1,16 +1,18 @@
 <?php
 /**
  * @author      Benjamin Rosenberger <rosenberger@e-conomix.at>
- * @package
  * @copyright   Copyright (c) 2017 E-CONOMIX GmbH (http://www.e-conomix.at)
  */
 
 namespace Economix\DbTranslations\Model;
 
-
 use Economix\DbTranslations\Api\TranslateInterface;
 use Magento\Framework\Model\AbstractModel;
 
+/**
+ * Class Translate
+ * .
+ */
 class Translate extends AbstractModel implements TranslateInterface
 {
     protected $_eventPrefix = 'ecx_translate';
@@ -111,6 +113,4 @@ class Translate extends AbstractModel implements TranslateInterface
         $this->setData('crc', crc32($this->getTranslate()));
         return parent::beforeSave();
     }
-
-
 }
