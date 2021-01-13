@@ -1,17 +1,18 @@
 <?php
 /**
  * @author      Benjamin Rosenberger <rosenberger@e-conomix.at>
- * @package
  * @copyright   Copyright (c) 2017 E-CONOMIX GmbH (http://www.e-conomix.at)
  */
 
 namespace Economix\DbTranslations\Observer;
 
-
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
+/**
+ * Class InvalidateTranslationCache .
+ */
 class InvalidateTranslationCache implements ObserverInterface
 {
     /**
@@ -27,7 +28,6 @@ class InvalidateTranslationCache implements ObserverInterface
     {
         $this->typeList = $typeList;
     }
-
 
     /**
      * @param Observer $observer

@@ -1,7 +1,6 @@
 <?php
 /**
  * @author      Benjamin Rosenberger <rosenberger@e-conomix.at>
- * @package
  * @copyright   Copyright (c) 2017 E-CONOMIX GmbH (http://www.e-conomix.at)
  */
 
@@ -9,7 +8,6 @@ namespace Economix\DbTranslations\Api;
 
 /**
  * Interface TranslateInterface
- * @package Economix\DbTranslations\Api
  * @api
  */
 interface TranslateInterface
