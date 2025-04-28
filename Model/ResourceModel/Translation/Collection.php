@@ -49,7 +49,7 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         ManagerInterface $eventManager,
         StoreManagerInterface $storeManager,
         $connection = null,
-        AbstractDb $resource = null
+        ?AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,

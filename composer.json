@@ -1,7 +1,7 @@
 {
   "name": "e-conomix/module-dbtranslations",
   "type": "magento2-module",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "license": ["MIT"],
   "description": "Economix DB translation module",
   "keywords":[ "composer-installer", "magento"],
@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "php": ">8.0",
     "magento/framework": "101.*|102.*|103.*"
   },
   "require-dev":{
