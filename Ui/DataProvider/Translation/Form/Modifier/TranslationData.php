@@ -41,6 +41,9 @@ class TranslationData implements ModifierInterface
         /** @var $translation Translate */
         foreach ($items as $translation) {
             $_data = $translation->getData();
+            if (isset($_data['locale'])) {
+                $_data['translation_locale'] = $_data['locale'];
+            }
             if (isset($_data['store_id'])) {
                 $_data['stores'] = [$_data['store_id']];
             }

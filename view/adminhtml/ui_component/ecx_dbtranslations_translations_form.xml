@@ -97,7 +97,7 @@
                 </item>
             </argument>
         </field>
-        <field name="locale">
+        <field name="translation_locale">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
@@ -105,7 +105,7 @@
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">translation</item>
                     <item name="sortOrder" xsi:type="number">30</item>
-                    <item name="dataScope" xsi:type="string">locale</item>
+                    <item name="dataScope" xsi:type="string">translation_locale</item>
                     <item name="notice" xsi:type="string" translate="true">Enter locale here</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>

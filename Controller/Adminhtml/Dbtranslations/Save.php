@@ -52,6 +52,10 @@ class Save extends \Magento\Backend\App\Action
     {
         $translation = null;
         $data = $this->getRequest()->getPostValue();
+        if (isset($data['translation_locale'])) {
+            $data['locale'] = $data['translation_locale'];
+            unset($data['translation_locale']);
+        }
         $id = !empty($data['key_id']) ? $data['key_id'] : null;
         $resultRedirect = $this->resultRedirectFactory->create();
         try {
@@ -90,7 +94,7 @@ class Save extends \Magento\Backend\App\Action
                     )
                 );
             }
-            $resultRedirect->setPath('ecx_dbtanslations/dbtranslations/edit', ['key_id' => $id]);
+            $resultRedirect->setPath('ecx_dbtranslations/dbtranslations/edit', ['key_id' => $id]);
         }
         return $resultRedirect;
     }

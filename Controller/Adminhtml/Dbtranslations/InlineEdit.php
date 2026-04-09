@@ -69,7 +69,12 @@ class InlineEdit extends \Magento\Backend\App\Action
             ]);
         }
 
-        foreach (array_keys($postItems) as $brandId) {
+        foreach (array_keys($postItems) as $translationId) {
+            $rowData = $postItems[$translationId];
+            if (is_array($rowData) && isset($rowData['translation_locale'])) {
+                $rowData['locale'] = $rowData['translation_locale'];
+                unset($rowData['translation_locale']);
+            }
             try {
             } catch (LocalizedException $e) {
                 $error = true;
