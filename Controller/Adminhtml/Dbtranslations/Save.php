@@ -52,8 +52,9 @@ class Save extends \Magento\Backend\App\Action
         $translation = null;
         $data = $this->getRequest()->getPostValue();
         if (isset($data['translation_locale'])) {
-            $data['locale'] = $data['translation_locale'];
+            $locale = $data['translation_locale'];
             unset($data['translation_locale']);
+            $data['locale'] = $locale;
         }
         $id = !empty($data['key_id']) ? $data['key_id'] : null;
         $resultRedirect = $this->resultRedirectFactory->create();
