@@ -23,7 +23,6 @@ jobs:
           cd $MAGENTO_ROOT
           composer config repositories.local-source path $MAGENTO_ROOT/local-source/\*
           composer config --no-plugins allow-plugins true
-          composer config audit.block-insecure true
           COMPOSER_MIRROR_PATH_REPOS=1 composer require $COMPOSER_NAME:@dev --no-interaction --dev || exit 1
 
           CONFIGURATION_FILE=dev/tests/static/testsuite/Magento/Test/Php/_files/phpstan/phpstan.neon
