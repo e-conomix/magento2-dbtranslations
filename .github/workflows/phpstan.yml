@@ -8,7 +8,7 @@ jobs:
     container:
       image: extdn/magento-phpstan-action:8.2-latest
     steps:
-      - uses: actions/checkout@v
+      - uses: actions/checkout@v4
       - uses: extdn/github-actions-m2/magento-phpstan@master
         with:
           composer_name: e-conomix/module-dbtranslations
