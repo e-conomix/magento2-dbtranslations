@@ -18,8 +18,7 @@ class Delete extends \Magento\Backend\App\Action
     public function __construct(
         TranslateFactory $translationFactory,
         Action\Context $context
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->translationFactory = $translationFactory;
     }

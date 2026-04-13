@@ -11,7 +11,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Class InvalidateTranslationCache .
+ * Invalidates the translate cache after translation save/delete events.
  */
 class InvalidateTranslationCache implements ObserverInterface
 {
@@ -32,6 +32,7 @@ class InvalidateTranslationCache implements ObserverInterface
     /**
      * @param Observer $observer
      * @return void
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function execute(Observer $observer)
     {

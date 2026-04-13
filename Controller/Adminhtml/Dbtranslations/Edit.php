@@ -32,8 +32,7 @@ class Edit extends \Magento\Backend\App\Action
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         TranslateFactory $translationFactory,
         Action\Context $context
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->registry = $registry;
         $this->resultPageFactory = $resultPageFactory;
@@ -67,7 +66,11 @@ class Edit extends \Magento\Backend\App\Action
         $resultPage->setActiveMenu('Economix_DbTranslations::db_translations');
         $resultPage->getConfig()->getTitle()->prepend(__('Translations'));
         $resultPage->addBreadcrumb(__('Content'), __('Content'));
-        $resultPage->addBreadcrumb(__('DB Translations'), __('DB Translations'), $this->getUrl('ecx_dbtranslations/dbtranslations'));
+        $resultPage->addBreadcrumb(
+            __('DB Translations'),
+            __('DB Translations'),
+            $this->getUrl('ecx_dbtranslations/dbtranslations')
+        );
 
         if ($translationId === null) {
             $resultPage->addBreadcrumb(__('New Translation'), __('New Translation'));

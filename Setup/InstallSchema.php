@@ -7,7 +7,7 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
- * Class InstallSchema .
+ * Adds fulltext index on string and translate columns of the translation table.
  */
 class InstallSchema implements InstallSchemaInterface
 {

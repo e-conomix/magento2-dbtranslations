@@ -35,8 +35,7 @@ class Save extends \Magento\Backend\App\Action
         Context $context,
         DataObjectProcessor $dataObjectProcessor,
         DataObjectHelper $dataObjectHelper
-    )
-    {
+    ) {
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->dataObjectHelper = $dataObjectHelper;
         parent::__construct($context);
@@ -98,7 +97,6 @@ class Save extends \Magento\Backend\App\Action
         }
         return $resultRedirect;
     }
-
 
     /**
      * @param $translationData

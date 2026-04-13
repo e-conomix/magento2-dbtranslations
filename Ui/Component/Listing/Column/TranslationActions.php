@@ -1,5 +1,5 @@
 <?php
-namespace  Economix\DbTranslations\Ui\Component\Listing\Column;
+namespace Economix\DbTranslations\Ui\Component\Listing\Column;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -12,22 +12,22 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class TranslationActions extends Column
 {
     /**
-     * Url path  to edit
-     * 
+     * Url path to edit
+     *
      * @var string
      */
     const URL_PATH_EDIT = 'ecx_dbtranslations/dbtranslations/edit';
 
     /**
-     * Url path  to delete
-     * 
+     * Url path to delete
+     *
      * @var string
      */
     const URL_PATH_DELETE = 'ecx_dbtranslations/dbtranslations/delete';
 
     /**
      * URL builder
-     * 
+     *
      * @var \Magento\Framework\UrlInterface
      */
     protected $_urlBuilder;
@@ -45,12 +45,10 @@ class TranslationActions extends Column
         UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->_urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
-
 
     /**
      * Prepare Data Source
@@ -83,7 +81,10 @@ class TranslationActions extends Column
                             'label' => __('Delete'),
                             'confirm' => [
                                 'title' => __('Delete "${ $.$data.translate }"'),
-                                'message' => __('Are you sure you wan\'t to delete the translation "${ $.$data.string }"->"${ $.$data.translate }" ?')
+                                'message' => __(
+                                    'Are you sure you wan\'t to delete the translation'
+                                    . ' "${ $.$data.string }"->"${ $.$data.translate }" ?'
+                                )
                             ]
                         ]
                     ];

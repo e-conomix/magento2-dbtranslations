@@ -9,12 +9,11 @@ namespace Economix\DbTranslations\Model\ResourceModel\Translation;
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Framework\Event\ManagerInterface;
-use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Store\Model\Store;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Collection
+ * Translation collection backed by the core `translation` table.
  */
 class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult
 {
@@ -29,15 +28,13 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
      * @param FetchStrategyInterface $fetchStrategy
      * @param ManagerInterface $eventManager
      * @param null $connection
-     * @param AbstractDb|null $resource
      */
     public function __construct(
         EntityFactoryInterface $entityFactory,
         LoggerInterface $logger,
         FetchStrategyInterface $fetchStrategy,
         ManagerInterface $eventManager,
-        $connection = null,
-        ?AbstractDb $resource = null
+        $connection = null
     ) {
         parent::__construct(
             $entityFactory,

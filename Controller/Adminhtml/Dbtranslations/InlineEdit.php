@@ -3,51 +3,24 @@ namespace Economix\DbTranslations\Controller\Adminhtml\Dbtranslations;
 
 use Economix\DbTranslations\Model\Translate;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Framework\Registry;
-use Magento\Framework\Stdlib\DateTime\Filter\Date;
-use Magento\Framework\View\Result\PageFactory;
 
 class InlineEdit extends \Magento\Backend\App\Action
 {
-    /**
-     * @var DataObjectHelper
-     */
-    protected $dataObjectHelper;
-    /**
-     * @var DataObjectProcessor
-     */
-    protected $dataObjectProcessor;
     /**
      * @var JsonFactory
      */
     protected $jsonFactory;
 
     /**
-     * @param Registry $registry
-     * @param PageFactory $resultPageFactory
-     * @param Date $dateFilter
      * @param Context $context
-     * @param DataObjectProcessor $dataObjectProcessor
-     * @param DataObjectHelper $dataObjectHelper
      * @param JsonFactory $jsonFactory
      */
     public function __construct(
-        Registry $registry,
-        PageFactory $resultPageFactory,
-        Date $dateFilter,
         Context $context,
-        DataObjectProcessor $dataObjectProcessor,
-        DataObjectHelper $dataObjectHelper,
         JsonFactory $jsonFactory
-    )
-    {
-        $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->dataObjectHelper    = $dataObjectHelper;
-        $this->jsonFactory         = $jsonFactory;
+    ) {
+        $this->jsonFactory = $jsonFactory;
         parent::__construct($context);
     }
 
@@ -75,14 +48,6 @@ class InlineEdit extends \Magento\Backend\App\Action
                 $rowData['locale'] = $rowData['translation_locale'];
                 unset($rowData['translation_locale']);
             }
-            try {
-            } catch (LocalizedException $e) {
-                $error = true;
-            } catch (\RuntimeException $e) {
-                $error = true;
-            } catch (\Exception $e) {
-                $error = true;
-            }
         }
 
         return $resultJson->setData([
@@ -92,9 +57,9 @@ class InlineEdit extends \Magento\Backend\App\Action
     }
 
     /**
-     * Add brand id to error message
+     * Add translation id to error message
      *
-     * @param Brand $brand
+     * @param Translate $translate
      * @param string $errorText
      * @return string
      */
