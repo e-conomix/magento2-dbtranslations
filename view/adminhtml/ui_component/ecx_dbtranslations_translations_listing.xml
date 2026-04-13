@@ -56,7 +56,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="columnsData" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.ecx_dbtranslations_translation_listing.translation_columns</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_translations_listing.translation_columns</item>
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
                     <item name="displayArea" xsi:type="string">dataGridActions</item>
@@ -67,9 +67,9 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_listing_data_source</item>
-                    <item name="chipsProvider" xsi:type="string">ecx_dbtranslations_translation_listing.listing_top.listing_filters_chips</item>
+                    <item name="chipsProvider" xsi:type="string">ecx_dbtranslations_translations_listing.listing_top.listing_filters_chips</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.search</item>
                     </item>
                 </item>
@@ -97,10 +97,10 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.ecx_dbtranslations_translation_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_translations_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translation_listing.ecx_dbtranslations_translation_listing.translation_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_translations_listing.translation_columns.ids</item>
                 </item>
             </argument>
         </paging>
@@ -129,11 +129,11 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.listing_top.bookmarks</item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="editorConfig" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translation_listing.translation_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translations_listing.translation_columns.ids</item>
                     <item name="enabled" xsi:type="boolean">true</item>
                     <item name="indexField" xsi:type="string">key_id</item>
                     <item name="clientConfig" xsi:type="array">
@@ -143,7 +143,7 @@
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.translation_columns_editor</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.translation_columns_editor</item>
                         <item name="target" xsi:type="string">startEdit</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -151,7 +151,7 @@
                         </item>
                     </item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translation_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.listing_top.bookmarks</item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
                     </item>

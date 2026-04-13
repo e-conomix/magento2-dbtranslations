@@ -3,7 +3,7 @@
     <virtualType name="EcxTranslationUiDataProviderTranslationFormModifierPool" type="Magento\Ui\DataProvider\Modifier\Pool">
         <arguments>
             <argument name="modifiers" xsi:type="array">
-                <item name="brand_data" xsi:type="array">
+                <item name="translation_data" xsi:type="array">
                     <item name="class" xsi:type="string">Economix\DbTranslations\Ui\DataProvider\Translation\Form\Modifier\TranslationData</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                 </item>

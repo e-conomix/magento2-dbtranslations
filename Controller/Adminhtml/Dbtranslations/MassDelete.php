@@ -4,9 +4,6 @@ namespace Economix\DbTranslations\Controller\Adminhtml\Dbtranslations;
 use Economix\DbTranslations\Model\Translate;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Registry;
-use Magento\Framework\Stdlib\DateTime\Filter\Date;
-use Magento\Framework\View\Result\PageFactory;
 use Magento\Ui\Component\MassAction\Filter;
 use Economix\DbTranslations\Model\ResourceModel\Translation\CollectionFactory;
 
@@ -30,22 +27,18 @@ class MassDelete extends \Magento\Backend\App\Action
     protected $errorMessage;
 
     /**
-     * @param Registry $registry
-     * @param PageFactory $resultPageFactory
-     * @param Date $dateFilter
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
-     * @param $successMessage
-     * @param $errorMessage
+     * @param string $successMessage
+     * @param string $errorMessage
      */
     public function __construct(
-        \Magento\Translation\Model\ResourceModel\TranslateFactory $translationFactory,
         Context $context,
         Filter $filter,
         CollectionFactory $collectionFactory,
-        $successMessage='',
-        $errorMessage=''
+        $successMessage = '',
+        $errorMessage = ''
     ) {
         $this->filter            = $filter;
         $this->collectionFactory = $collectionFactory;

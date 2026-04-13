@@ -41,5 +41,7 @@ class InstallSchema implements InstallSchemaInterface
                 AdapterInterface::INDEX_TYPE_FULLTEXT
             );
         }
+
+        $installer->endSetup();
     }
 }

@@ -10,44 +10,32 @@ use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
-use Magento\Store\Model\StoreManagerInterface;
+use Magento\Store\Model\Store;
 use Psr\Log\LoggerInterface;
 
 /**
  * Class Collection
- * .
  */
 class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult
 {
-
     /**
      * @var string
      */
     protected $_idFieldName = 'key_id';
-    /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
 
     /**
-     * constructor
-     *
      * @param EntityFactoryInterface $entityFactory
      * @param LoggerInterface $logger
      * @param FetchStrategyInterface $fetchStrategy
      * @param ManagerInterface $eventManager
-     * @param StoreManagerInterface $storeManager
      * @param null $connection
-     * @param AbstractDb $resource
+     * @param AbstractDb|null $resource
      */
     public function __construct(
         EntityFactoryInterface $entityFactory,
         LoggerInterface $logger,
         FetchStrategyInterface $fetchStrategy,
         ManagerInterface $eventManager,
-        StoreManagerInterface $storeManager,
         $connection = null,
         ?AbstractDb $resource = null
     ) {
@@ -61,7 +49,6 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
             'key_id',
             $connection
         );
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -76,7 +63,6 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
             \Magento\Translation\Model\ResourceModel\Translate::class
         );
         $this->_map['fields']['key_id'] = 'main_table.key_id';
-        $this->_map['fields']['store_id'] = 'store_table.store_id';
     }
 
     public function addFieldToFilter($field, $condition = null)
@@ -91,7 +77,7 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
     /**
      * Add filter by store
      *
-     * @param int|\Magento\Store\Model\Store $store
+     * @param int|Store $store
      * @param bool $withAdmin
      * @return $this
      */
@@ -107,59 +93,11 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
             }
 
             if ($withAdmin) {
-                $store[] = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+                $store[] = Store::DEFAULT_STORE_ID;
             }
 
             $this->addFilter('store_id', ['in' => $store], 'public');
         }
         return $this;
-    }
-
-    /**
-     * @param $tableName
-     * @param $linkField
-     */
-    protected function performAfterLoad($tableName, $linkField)
-    {
-        foreach($this as $item) {
-            $item->setStores([(int)$item->getStoreId()]);
-        }
-
-        $linkedIds = $this->getColumnValues($linkField);
-        if (count($linkedIds)) {
-            $connection = $this->getConnection();
-            $select = $connection->select()->from(['ecx_catalog_brand_store' => $this->getTable($tableName)])
-                ->where('ecx_catalog_brand_store.' . $linkField . ' IN (?)', $linkedIds);
-            // @codingStandardsIgnoreStart
-            $result = $connection->fetchAll($select);
-            // @codingStandardsIgnoreEnd
-            if ($result) {
-                $storesData = [];
-                foreach ($result as $storeData) {
-                    $storesData[$storeData[$linkField]][] = $storeData['store_id'];
-                }
-
-                foreach ($this as $item) {
-                    $linkedId = $item->getData($linkField);
-                    if (!isset($storesData[$linkedId])) {
-                        continue;
-                    }
-                    $storeIdKey = array_search(
-                        \Magento\Store\Model\Store::DEFAULT_STORE_ID,
-                        $storesData[$linkedId],
-                        true
-                    );
-                    if ($storeIdKey !== false) {
-                        $stores = $this->storeManager->getStores(false, true);
-                        $storeId = current($stores)->getId();
-                        $storeCode = key($stores);
-                    } else {
-                        $storeId = current($storesData[$linkedId]);
-                        $storeCode = $this->storeManager->getStore($storeId)->getCode();
-                    }
-                    $item->setData('store_id', $storesData[$linkedId]);
-                }
-            }
-        }
     }
 }
