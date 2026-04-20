@@ -7,4 +7,9 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Translation\Model\ResourceModel\Translate">
+        <plugin name="ecx_dbtranslations_skip_db_translation_in_adminhtml"
+                type="Economix\DbTranslations\Plugin\Translation\TranslateResourcePlugin"
+                sortOrder="10"/>
+    </type>
 </config>
