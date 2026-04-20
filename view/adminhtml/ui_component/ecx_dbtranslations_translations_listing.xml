@@ -133,7 +133,7 @@
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="editorConfig" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translations_listing.translation_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_translations_listing.translation_columns.ids</item>
                     <item name="enabled" xsi:type="boolean">true</item>
                     <item name="indexField" xsi:type="string">key_id</item>
                     <item name="clientConfig" xsi:type="array">
@@ -143,7 +143,7 @@
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.translation_columns_editor</item>
+                        <item name="provider" xsi:type="string">ecx_dbtranslations_translations_listing.ecx_dbtranslations_translations_listing.translation_columns_editor</item>
                         <item name="target" xsi:type="string">startEdit</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -216,7 +216,7 @@
                 </item>
             </argument>
         </column>
-        <column name="locale">
+        <column name="translation_locale">
             <argument name="data" xsi:type="array">
                 <item name="js_config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
@@ -234,14 +234,17 @@
                 </item>
             </argument>
         </column>
-        <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Store View</item>
-                </item>
-            </argument>
+        <column name="store_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Economix\DbTranslations\Ui\Component\Listing\Column\Store\Options"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Store View</label>
+            </settings>
         </column>
         <actionsColumn name="actions" class="Economix\DbTranslations\Ui\Component\Listing\Column\TranslationActions">
             <argument name="data" xsi:type="array">

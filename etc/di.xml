@@ -7,10 +7,4 @@
             </argument>
         </arguments>
     </type>
-    <virtualType name="Economix\DbTranslations\Model\ResourceModel\Translation\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">translation</argument>
-            <argument name="resourceModel" xsi:type="string">Magento\Translation\Model\ResourceModel\Translate</argument>
-        </arguments>
-    </virtualType>
 </config>
