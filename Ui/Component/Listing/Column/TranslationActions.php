@@ -1,41 +1,34 @@
 <?php
+declare(strict_types=1);
+
 namespace Economix\DbTranslations\Ui\Component\Listing\Column;
 
+use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
-use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * @method TranslationActions setName($name)
- */
 class TranslationActions extends Column
 {
-    /**
-     * Url path to edit
-     *
-     * @var string
-     */
-    const URL_PATH_EDIT = 'ecx_dbtranslations/dbtranslations/edit';
+    public const URL_PATH_EDIT = 'ecx_dbtranslations/dbtranslations/edit';
+    public const URL_PATH_DELETE = 'ecx_dbtranslations/dbtranslations/delete';
 
     /**
-     * Url path to delete
-     *
-     * @var string
+     * @var UrlInterface
      */
-    const URL_PATH_DELETE = 'ecx_dbtranslations/dbtranslations/delete';
+    private $urlBuilder;
 
     /**
-     * URL builder
-     *
-     * @var \Magento\Framework\UrlInterface
+     * @var Escaper
      */
-    protected $_urlBuilder;
+    private $escaper;
 
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param UrlInterface $urlBuilder
+     * @param Escaper $escaper
      * @param array $components
      * @param array $data
      */
@@ -43,54 +36,61 @@ class TranslationActions extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
+        Escaper $escaper,
         array $components = [],
         array $data = []
     ) {
-        $this->_urlBuilder = $urlBuilder;
+        $this->urlBuilder = $urlBuilder;
+        $this->escaper = $escaper;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
     /**
-     * Prepare Data Source
-     *
-     * @param array $dataSource
-     * @return array
+     * @inheritDoc
      */
-    public function prepareDataSource(array $dataSource)
+    public function prepareDataSource(array $dataSource): array
     {
-        if (isset($dataSource['data']['items'])) {
-            foreach ($dataSource['data']['items'] as & $item) {
-                if (isset($item['key_id'])) {
-                    $item[$this->getData('name')] = [
-                        'edit' => [
-                            'href' => $this->_urlBuilder->getUrl(
-                                static::URL_PATH_EDIT,
-                                [
-                                    'key_id' => $item['key_id']
-                                ]
-                            ),
-                            'label' => __('Edit')
-                        ],
-                        'delete' => [
-                            'href' => $this->_urlBuilder->getUrl(
-                                static::URL_PATH_DELETE,
-                                [
-                                    'key_id' => $item['key_id']
-                                ]
-                            ),
-                            'label' => __('Delete'),
-                            'confirm' => [
-                                'title' => __('Delete "${ $.$data.translate }"'),
-                                'message' => __(
-                                    'Are you sure you wan\'t to delete the translation'
-                                    . ' "${ $.$data.string }"->"${ $.$data.translate }" ?'
-                                )
-                            ]
-                        ]
-                    ];
-                }
-            }
+        if (!isset($dataSource['data']['items'])) {
+            return $dataSource;
         }
+
+        $name = $this->getData('name');
+
+        foreach ($dataSource['data']['items'] as &$item) {
+            if (!isset($item['key_id'])) {
+                continue;
+            }
+
+            $string = $this->escaper->escapeHtml((string) ($item['string'] ?? ''));
+            $translate = $this->escaper->escapeHtml((string) ($item['translate'] ?? ''));
+
+            $item[$name] = [
+                'edit' => [
+                    'href' => $this->urlBuilder->getUrl(
+                        self::URL_PATH_EDIT,
+                        ['key_id' => $item['key_id']]
+                    ),
+                    'label' => __('Edit'),
+                ],
+                'delete' => [
+                    'href' => $this->urlBuilder->getUrl(
+                        self::URL_PATH_DELETE,
+                        ['key_id' => $item['key_id']]
+                    ),
+                    'label' => __('Delete'),
+                    'confirm' => [
+                        'title' => __('Delete "%1"', $translate),
+                        'message' => __(
+                            'Are you sure you want to delete the translation "%1" → "%2"?',
+                            $string,
+                            $translate
+                        ),
+                    ],
+                    'post' => true,
+                ],
+            ];
+        }
+
         return $dataSource;
     }
 }

@@ -7,10 +7,9 @@
             </argument>
         </arguments>
     </type>
-    <virtualType name="Economix\DbTranslations\Model\ResourceModel\Translation\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">translation</argument>
-            <argument name="resourceModel" xsi:type="string">Magento\Translation\Model\ResourceModel\Translate</argument>
-        </arguments>
-    </virtualType>
+    <type name="Magento\Translation\Model\ResourceModel\Translate">
+        <plugin name="ecx_dbtranslations_skip_db_translation_in_adminhtml"
+                type="Economix\DbTranslations\Plugin\Translation\TranslateResourcePlugin"
+                sortOrder="10"/>
+    </type>
 </config>
